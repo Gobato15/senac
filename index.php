@@ -7,11 +7,10 @@ global $alunos;
 $a = null;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-if (isset($_POST["pesquisa"])){
-    $a = $controller->pesquisaAluno($_POST["pesquisa"]);
+if (isset($_POST["pesquisar"])){
+    $a = $controller->pesquisaAluno($_POST["pesquisar"]);
     }
 }
-
 
 ?>
 
@@ -34,11 +33,9 @@ if (isset($_POST["pesquisa"])){
 <h3>Pesquisar Aluno</h3>
 <form method="POST"action="index.php">
     <label>RA</label>
-    <input type="number"name="pesquisa">
+    <input type="number"name="pesquisar">
     <button>Pesquisar</button>
     </form>
-
-
 
 <table>
     <tr>
@@ -46,12 +43,10 @@ if (isset($_POST["pesquisa"])){
     <td>Nome</td>
     </tr>
     <?php if($a) :?>
-<!--        --><?php //foreach($a as $aluno) :?>
             <tr>
-                <td><?php echo $a->ra; ?></td>
-                <td><?php echo $a->nome; ?></td>
+                <td><?=$a->ra; ?></td>
+                <td><?=$a->nome; ?></td>
             </tr>
-<!--    --><?php //endforeach; ?>
     <?php endif; ?>
 
 </table>
@@ -68,12 +63,14 @@ if (isset($_POST["pesquisa"])){
     <?php if($alunos) :?>
     <?php foreach($alunos as $aluno) :?>
     <tr>
-        <td><?php echo $aluno->ra; ?></td>
-        <td><?php echo $aluno->nome; ?></td>
-        <td><?php echo $aluno->email; ?></td>
-        <td><?php echo $aluno->telefone; ?></td>
-        <td><?php echo $aluno->login; ?></td>
+
+        <td><?=$aluno->ra; ?></td>
+        <td><?=$aluno->nome; ?></td>
+        <td><?=$aluno->email; ?></td>
+        <td><?=$aluno->telefone; ?></td>
+        <td><?=$aluno->login; ?></td>
     </tr>
+
     <?php endforeach; ?>
     <?php endif; ?>
 

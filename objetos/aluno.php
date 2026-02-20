@@ -28,7 +28,7 @@ Class Aluno{
         $resultado->bindParam(":ra", $ra);
         $resultado->execute();
 
-        return $resultado->fetchall(PDO::FETCH_OBJ);
+        return $resultado->fetch(PDO::FETCH_OBJ);
 
     }
 

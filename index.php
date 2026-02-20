@@ -11,7 +11,7 @@ if (isset($_POST["pesquisa"])){
     $a = $controller->pesquisaAluno($_POST["pesquisa"]);
     }
 }
-var_dump($a);
+
 
 ?>
 

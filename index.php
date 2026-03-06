@@ -71,15 +71,15 @@ if (isset($_POST["pesquisar"])){
         <td><?=$aluno->email; ?></td>
         <td><?=$aluno->telefone; ?></td>
         <td><?=$aluno->login; ?></td>
+        <td><a href="atualizar.php?alterar=<?= $aluno->ra ?>">Alterar</a></td>
+        <td><a href="index.php?excluir=<?= $aluno->ra ?>">Excluir</a></td>
     </tr>
-
     <?php endforeach; ?>
     <?php endif; ?>
 
 </table>
 
 </body>
-
 </html>
 
 

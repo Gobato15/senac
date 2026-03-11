@@ -11,7 +11,11 @@ if (isset($_POST["pesquisar"])){
     $a = $controller->pesquisaAluno($_POST["pesquisar"]);
     }
 }
-
+if($_SERVER["REQUEST_METHOD"] === "GET"){
+    if(isset($_GET["excluir"])){
+        $a = $controller->excluirAluno($_GET["excluir"]);
+    }
+}
 ?>
 
 <!doctype html>
@@ -61,6 +65,7 @@ if (isset($_POST["pesquisar"])){
     <td>E-mail</td>
     <td>Telefone</td>
     <td>Login</td>
+    <td>Imagem</td>
     </tr>
     <?php if($alunos) :?>
     <?php foreach($alunos as $aluno) :?>
@@ -71,6 +76,15 @@ if (isset($_POST["pesquisar"])){
         <td><?=$aluno->email; ?></td>
         <td><?=$aluno->telefone; ?></td>
         <td><?=$aluno->login; ?></td>
+
+        <?php if($aluno->imagem ==""):?>
+        <td><img style="width: 20%;"src="imagem/image-fail.jpg"></td>
+        <?php else : ?>
+
+            <td><img style="width: 20%" src="uploads/<?=$aluno->imagem;?>"</td>
+        <?php endif; ?>
+
+
         <td><a href="atualizar.php?alterar=<?= $aluno->ra ?>">Alterar</a></td>
         <td><a href="index.php?excluir=<?= $aluno->ra ?>">Excluir</a></td>
     </tr>

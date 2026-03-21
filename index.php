@@ -1,6 +1,13 @@
 <?php
 include_once "objetos/AlunoController.php";
 
+//Login
+session_start();
+if (!isset($_SESSION["aluno"])){
+    header("location: login.php");
+    exit();
+}
+
 $controller = new AlunoController();
 $alunos = $controller->index();
 global $alunos;
@@ -33,6 +40,10 @@ if($_SERVER["REQUEST_METHOD"] === "GET"){
     </style>
 </head>
 <body>
+<!--Código linha Sair-->
+<p><strong>Usuário Logado:</strong><?=$_SESSION['aluno']->nome ?>
+- <a href="logout.php">Sair</a>
+</p>
 <h1>Senac Rio Claro</h1>
 <a href="cadastro.php">Cadastrar Aluno</a>
 
@@ -60,33 +71,33 @@ if($_SERVER["REQUEST_METHOD"] === "GET"){
 <h2>Alunos Cadastrados</h2>
 
 <table>
+
     <td>RA</td>
     <td>Nome</td>
     <td>E-mail</td>
-    <td>Telefone</td>
-    <td>Login</td>
-    <td>Imagem</td>
+
     </tr>
     <?php if($alunos) :?>
     <?php foreach($alunos as $aluno) :?>
     <tr>
+<!--        Botão de Validação-->
 
-        <td><?=$aluno->ra; ?></td>
+        <td><a href="ver-aluno.php?ra=<?= $aluno->ra;?>"><?= $aluno->ra; ?></a></td>
         <td><?=$aluno->nome; ?></td>
         <td><?=$aluno->email; ?></td>
-        <td><?=$aluno->telefone; ?></td>
-        <td><?=$aluno->login; ?></td>
 
-        <?php if($aluno->imagem ==""):?>
-        <td><img style="width: 20%;"src="imagem/image-fail.jpg"></td>
-        <?php else : ?>
-
-            <td><img style="width: 20%" src="uploads/<?=$aluno->imagem;?>"</td>
-        <?php endif; ?>
+<!--        --><?php //if($aluno->imagem ==""):?>
+<!--        <td><img style="width: 20%;"src="imagem/image-fail.jpg"></td>-->
+<!--        --><?php //else : ?>
+<!---->
+<!--            <td><img style="width: 20%" src="uploads/--><?php //=$aluno->imagem;?><!--"</td>-->
+<!--        --><?php //endif; ?>
 
 
         <td><a href="atualizar.php?alterar=<?= $aluno->ra ?>">Alterar</a></td>
         <td><a href="index.php?excluir=<?= $aluno->ra ?>">Excluir</a></td>
+<!--        Visualizar-->
+        <td><a href="ver-aluno.php?ra=<?= $aluno->ra ?>">Visualizar</a></td>
     </tr>
     <?php endforeach; ?>
     <?php endif; ?>
